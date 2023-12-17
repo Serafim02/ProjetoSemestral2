@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro Uber</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        img {
+            width: 50%; 
+            max-width: 200px; 
+            margin-bottom: 200px;
+            margin-top: -220px;
+        }
+
+        .finance-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            margin: 10px;
+            width: 70%; /* Adjust the width as needed */
+            max-width: 400px; /* Set a maximum width */
+        }
+
+        .finance-panel label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .finance-panel input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .finance-panel button {
+            background-color: #000;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .finance-panel button:hover {
+            background-color: #000;
+        }
+
+        #total-earnings, #net-income {
+            text-align: center;
+        }
+        .container{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="uber70th.png" alt="Uber Logo">
+    <div class="container">
+    <div class="finance-panel" id="finance-panel-1">
+        <h2>Dados do mês</h2>
+        <label for="ride-earnings-1">Corridas pagas no dinheiro:</label>
+        <input type="number" id="ride-earnings-1" name="ride-earnings-1" step="0.01" required>
+
+        <label for="expenses-1">Gastos com gasolina:</label>
+        <input type="number" id="expenses-1" name="expenses-1" step="0.01" required>
+
+        <button type="button" onclick="calcularFinanceiro(1)">Calcular</button>
+    </div>
+
+    <div class="finance-panel" id="finance-panel-2">
+        <h2>Dados do mês</h2>
+        <label for="ride-earnings-2">Corridas pagas no PIX:</label>
+        <input type="number" id="ride-earnings-2" name="ride-earnings-2" step="0.01" required>
+
+        <label for="expenses-2">Gastos com manutenção do carro:</label>
+        <input type="number" id="expenses-2" name="expenses-2" step="0.01" required>
+
+        <button type="button" onclick="calcularFinanceiro(2)">Calcular</button>
+    </div>
+
+    <div class="finance-panel" id="finance-panel-3">
+        <h2>Dados do mês</h2>
+        <label for="ride-earnings-3">Corridas pagas no app:</label>
+        <input type="number" id="ride-earnings-3" name="ride-earnings-3" step="0.01" required>
+
+        <label for="expenses-3">Gastos adicionais:</label>
+        <input type="number" id="expenses-3" name="expenses-3" step="0.01" required>
+
+        <button type="button" onclick="calcularFinanceiro(3)">Calcular</button>
+    </div>
+</div>
+    <script>
+        function calcularFinanceiro(panelNumber) {
+            var rideEarnings = parseFloat(document.getElementById('ride-earnings-' + panelNumber).value) || 0;
+            var expenses = parseFloat(document.getElementById('expenses-' + panelNumber).value) || 0;
+
+            var totalEarnings = rideEarnings;
+            var netIncome = totalEarnings - expenses;
+
+            alert('Total de ganhos: R$ ' + totalEarnings.toFixed(2) + '\nLucro: R$ ' + netIncome.toFixed(2));
+        }
+    </script>
+
+</body>
+</html>

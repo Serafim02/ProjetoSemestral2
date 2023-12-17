@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Uber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "uber";
+        }
+
+        @font-face {
+            font-family: 'Mont';
+            src: url(UberMoveMedium.otf);
+        }
+
+        #container {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 50px;
+            font-family: 'Mont';
+            src: url(UberMoveMedium.otf);
+        }
+
+        #camera {
+
+            border: 2px solid rgb(0, 0, 0);
+            background-size: cover;
+            border-radius: 150px;
+            background-position: 50%;
+            background-attachment: fixed;
+            object-fit: cover;
+            font-family: 'Mont';
+                src: url(UberMoveMedium.otf);
+        }
+.botoes {
+    margin-top: 30px;
+}
+.botoes button {
+    background-color: rgb(255, 255, 255);
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin: 0 15px;
+}
+        h2 {
+            color: rgb(0, 0, 0);
+            font-size: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        body {
+            background-color: rgb(255, 255, 255);
+        }
+
+        input {
+            padding: 3px 5px;
+            display: block;
+
+        }
+
+        .fotos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #uberForm,
+        input {
+            border-radius: 5px;
+        }
+
+        #uberForm label {
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+        }
+
+        #uberForm {
+            text-align: center;
+            padding: 15px 20px;
+
+        }
+
+        #uberForm input,
+        #uberForm video,
+        #uberForm button {
+            margin-bottom: 10px;
+        }
+
+        header {
+            background-color: rgb(0, 0, 0);
+        }
+
+        h1 {
+         color: black;
+          padding: 7px 20px;
+        }
+        .botao {
+            font-size: 25px;
+            transition: 0.3s ease-in-out;
+        }
+        .botao:hover {
+            border: 1px solid rgb(255, 255, 255);
+            background-color: black;
+            color: rgb(255, 255, 255);
+        }
+        .logo {
+            width: 50px;
+            margin-left: 20px;
+            margin-top: 10px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="imgs/uber-logo-white (1).png" alt="">
+    </header>
+
+    <h1></h1>
+    <h2>Cadastro Uber</h2>
+
+    <div id="container">
+        
+        <form id="uberForm">
+           
+
+            <label for="Placa do carro">Placa do carro:</label>
+            <input type="text" id="Placa do carro" name="Placa do carro" required>
+
+            <label for="Modelo do carro">Modelo do carro:</label>
+            <input type="text" id="Modelo do carro" name="Modelo do carro" required>
+
+            <label for="CPF">CPF:</label>
+            <input type="text" id="CPF" name="CPF" required>
+
+            <label for="número de telefone">Número de telefone:</label>
+            <input type="text" id="número" name="número" required>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+
+            <input class="botao" type="submit" value="Cadastrar">
+        </form>
+        <div class="fotos">
+
+
+            <label for="foto">Foto (Câmera):</label>
+            <video id="camera" width="300" height="300" autoplay></video>
+            <div class="botoes">
+
+
+                <button id="capturarFoto">Capturar Foto</button>
+
+                <button onclick="abrirCamera()">Abrir Camera</button>
+                <button onclick="fechar()">Fechar Camera</button>
+            </div>
+
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.getElementById('uberForm');
+                const video = document.getElementById('camera');
+                const captureButton = document.getElementById('capturarFoto');
+
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then((stream) => {
+                        video.srcObject = stream;
+                    })
+                    .catch((err) => {
+                        console.error('Erro ao acessar a câmera: ', err);
+                    });
+
+                captureButton.addEventListener('click', function () {
+                    alert('Foto capturada!');
+                });
+
+                form.addEventListener('submit', function (event) {
+                    alert('Dados enviados! Te vemos na estrada (vrum, vrum)');
+                    event.preventDefault();
+                });
+            });
+
+            var mediaStream
+
+            function abrirCamera() {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                    .then(function (stream) {
+                        mediaStream = stream
+
+                        const areaVideo = document.getElementById('camera')
+                        areaVideo.srcObject = stream
+
+                    })
+                    .catch(function (error) {
+                        console.error('Erro ao acessar a câmera', error)
+                    })
+            }
+
+
+            function fechar() {
+                navigator.mediaDevices.getUserMedia({ video: false })
+                const areaVideo = document.getElementById('camera')
+                areaVideo.srcObject = null
+                mediaStream = null
+            }
+
+            function redirecionarParaProximaPagina() {
+    // Supondo que o cadastro foi bem-sucedido
+    // Você pode adicionar sua lógica de cadastro aqui
+
+    // Redirecionar para a próxima página
+    window.location.href = "Projeto.html";
+  }
+        </script>
+
+    </div>
+</body>
+
+</html>

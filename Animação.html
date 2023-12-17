@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uber Animation</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #car {
+      position: absolute;
+      top: 50%;
+      left: -100px; /* Inicia fora da tela à esquerda */
+      width: 100px;
+      height: 50px;
+      background-color: #3498db;
+      transform: translateY(-50%);
+      transition: left 3s linear; /* Animação de 3 segundos em linha reta */
+    }
+    #logo {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background-color: black;
+      padding: 20px;
+      color: white;
+      transition: transform 1s ease; /* Animação de escala de 1 segundo */
+    }
+  </style>
+</head>
+<body>
+
+<div id="car"></div>
+<div id="logo">
+  <img src="" alt="Uber Logo">
+</div>
+
+<script>
+  $(document).ready(function() {
+    // Mover o carro em linha reta
+    $("#car").css("left", "calc(100% + 100px)").on("transitionend", function() {
+      // Quando a animação do carro terminar, mostrar a logo da Uber
+      $("#logo").fadeIn();
+      // Expandir a logo usando TweenMax
+      gsap.to("#logo", { scale: 1, ease: "easeOut", onComplete: redirectToAnotherPage });
+    });
+
+    // Iniciar a animação
+    $("#car").css("left", "calc(100% - 100px)");
+
+    function redirectToAnotherPage() {
+      // Redirecionar para outra página após a animação
+      window.location.href = "Projeto.html";
+    }
+  });
+</script>
+
+</body>
+</html>
